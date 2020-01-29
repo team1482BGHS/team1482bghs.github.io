@@ -11,7 +11,7 @@ module.exports = function(eleventyConfig) {
   return {
     dir: {
       input: "src",
-      output: "doc", // github uses doc for their pages
+      output: "docs", // github uses doc for their pages
       data: "_data"
     },
     passthroughFileCopy: true
