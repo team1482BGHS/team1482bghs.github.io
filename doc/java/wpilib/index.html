@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto&display=swap' rel='stylesheet'>
+    <link rel='stylesheet' type='text/css' href='/css/main.css'>
+    <title>WPILib</title>
+  </head>
+  <body>
+    <link rel='stylesheet' type='text/css' href='/css/doc.css'>
+<div id='content'>
+  <h1>WPILib</h1>
+<p>WPILib is the main offical FRC library (a library is some external code that leverages code for subcomponents). It's maintained by FIRST and is used in every supported programming language (Java, C++ and Python with pyfrc).
+It contains the bulk of the supporting code that <strong>runs on the robot</strong>, including</p>
+<ul>
+<li>operating motors</li>
+<li>reading values from sensors such as
+<ul>
+<li>encoders, which detect the rotational position of a axel</li>
+<li>proximity sensors, which detect the distance to the closest object</li>
+<li>color sensors and cameras</li>
+</ul>
+</li>
+<li>reading inputs from the controlling machine such as
+<ul>
+<li>connected controllers</li>
+<li>paramaters chosen from a dashboard</li>
+</ul>
+</li>
+</ul>
+<p>The code runs on the robot and remotely connects via wifi to DriverStation, which relays remote inputs to the robot.</p>
+<h2>Third-party libraries</h2>
+<p>As of 2019, parts of WPILib have been split into third-party libraries, which are separate and not included in the official install. Vendor-specific (third-parties are referred to as vendors) components, such as TalonSXR from CTR electronics or Sparks from Rev robotics are now required to be separately installed in addition to WPILib. The build script should automatically push the libraries to the RoboRIO the first time it is ran.</p>
+<p>In addition to that third-party libraries also have a local configuration client which is used to setup device ids and other parameters. Configurations are saved in <a href="https://en.wikipedia.org/wiki/Non-volatile_memory">non-volatile memory</a> and only have to be configured once.</p>
+<h2>Program Structure</h2>
+<p>All robot projects follow roughly a preset superclass and they override methods to provide functionality.</p>
+<h3><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/TimedRobot.html">TimedRobot</a></h3>
+<p>A TimerRobot class is ran on a loop which periodically calls methods on a tight loop (~20 milliseconds).</p>
+<h3><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/CommandRobot.html">CommandRobot</a></h3>
+<pre class="language-java"><code class="language-java"><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj</span><span class="token punctuation">.</span><span class="token class-name">TimedRobot</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj</span><span class="token punctuation">.</span><span class="token class-name">CommandRobot</span><span class="token punctuation">;</span></code></pre>
+<h2>Motor Controllers &amp; Motors</h2>
+<p>WPILib has two separate concepts which controlling motors: motor controllers and drive configurations.</p>
+<h3>Motor Controllers</h3>
+<p>A motor controller is physically identical to a talon. Aside from motor controllers connected via PWM or digital inputs, all other motor controllers are provided by third-party libraries. Controllers are indexed by integer identifiers which are configured in advance by the client.</p>
+<pre class="language-java"><code class="language-java"><span class="token comment">// Spark controllers</span><br><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>revrobotics</span><span class="token punctuation">.</span><span class="token class-name">CANSparkMax</span><span class="token punctuation">;</span><br><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>revrobotics</span><span class="token punctuation">.</span><span class="token class-name">CANSparkMaxLowLevel</span><span class="token punctuation">.</span><span class="token class-name">MotorType</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">CANSparkMax</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token class-name">MotorType</span><span class="token punctuation">.</span>kBrushless<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// TalonSRX</span><br><span class="token keyword">import</span> <span class="token namespace">com<span class="token punctuation">.</span>ctre<span class="token punctuation">.</span>phoenix<span class="token punctuation">.</span>motorcontrol<span class="token punctuation">.</span>can</span><span class="token punctuation">.</span><span class="token class-name">WPI_TalonSRX</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">WPI_TalonSRX</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h3>Drive Configurations</h3>
+<p>All drive configurations take in motor controllers as a parameters, and drive them simultaneously.</p>
+<ul>
+<li><strong><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/drive/DifferentialDrive.html">DifferentialDrive</a></strong> is a 2 motor standard drive for belts, chains and standalone wheels. It can be extended to any amount of motors on each side using <strong><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/SpeedControllerGroup.html">SpeedControllerGroups</a></strong>.</li>
+<li><strong><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/drive/MecanumDrive.html">MecanumDrive</a></strong> is a 4 motor drive where all wheels are <a href="https://en.wikipedia.org/wiki/Mecanum_wheel">mecanum wheels</a>.</li>
+<li><strong><a href="https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/drive/KilloughDrive.html">KilloughDrive</a></strong> is a <a href="https://en.wikipedia.org/wiki/Killough_platform">3 motor drive</a> where all wheels are 60° apart.</li>
+</ul>
+<pre class="language-java"><code class="language-java"><span class="token comment">// DifferentialDrive</span><br><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj<span class="token punctuation">.</span>drive</span><span class="token punctuation">.</span><span class="token class-name">DifferentialDrive</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">DifferentialDrive</span><span class="token punctuation">(</span>motorShooterLeft<span class="token punctuation">,</span> motorShooterLeft<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// DifferentialDrive with SpeedControllerGroups (more than 2 motors)</span><br><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj</span><span class="token punctuation">.</span><span class="token class-name">MecanumDrive</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">MecanumDrive</span><span class="token punctuation">(</span><br>  <span class="token keyword">new</span> <span class="token class-name">SpeedControllerGroup</span><span class="token punctuation">(</span>motorFrontLeft<span class="token punctuation">,</span> motorRearLeft<span class="token punctuation">)</span><span class="token punctuation">,</span><br>  <span class="token keyword">new</span> <span class="token class-name">SpeedControllerGroup</span><span class="token punctuation">(</span>motorFrontRight<span class="token punctuation">,</span> motorRearRight<span class="token punctuation">)</span><br><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// DifferentialDrive with SpeedControllerGroups (more than 2 motors)</span><br><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj</span><span class="token punctuation">.</span><span class="token class-name">MecanumDrive</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">MecanumDrive</span><span class="token punctuation">(</span>frontLeftMotor<span class="token punctuation">,</span> rearLeftMotor<span class="token punctuation">,</span> frontRightMotor<span class="token punctuation">,</span> rearRightMotor<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// KilloughDrive</span><br><span class="token keyword">import</span> <span class="token namespace">edu<span class="token punctuation">.</span>wpi<span class="token punctuation">.</span>first<span class="token punctuation">.</span>wpilibj</span><span class="token punctuation">.</span><span class="token class-name">KilloughDrive</span><span class="token punctuation">;</span><br><span class="token keyword">new</span> <span class="token class-name">KilloughDrive</span><span class="token punctuation">(</span>motorLeft<span class="token punctuation">,</span> motorRight<span class="token punctuation">,</span> motorBack<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+
+</div>
+  </body>
+</html>
