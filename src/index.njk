@@ -1,6 +1,7 @@
----
-layout: master.njk
-title: 1482 documentation pages
----
+{% extends "master.njk" %}
 
-<meta http-equiv='Refresh' content='0; url={{ "/java" | url }}' />
+{% block head %}
+<link rel='stylesheet' type='text/css' href='{{ "/css/doc.css" | url }}'>
+<meta http-equiv='refresh' content='0; url={{ "/java" | url }}' />
+<a href="{{ "/java" | url }}">Go to {{ "/java" | url }}</a>
+{% endblock %}

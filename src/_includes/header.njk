@@ -1,8 +1,20 @@
 <div id='header'>
-  {# <div id='menu'>
-    <ul> #}
-      <li>Home</li>
-      <li>Java</li>
-    {# </ul>
-  </div> #}
+  {% for item in menu %}
+    {% if item.permalink != null %}
+      <li>
+        <a
+          href='{{ item.permalink | url }}'
+          {% if item.external %}
+            target='_blank'
+          {% endif %}
+        >
+          {{ item.title }}
+        </a>
+      </li>
+    {% else %}
+      <li class='noselect'>
+        {{ item.title }}
+      </li>
+    {% endif %}
+  {% endfor %}
 </div>

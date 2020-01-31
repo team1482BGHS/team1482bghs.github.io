@@ -1,21 +1,46 @@
-body {
+html, body {
   background-color: #1c1d1a;
+  color: #F8F8F2;
+
+  scrollbar-color: #272822 #1c1d1a;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
 }
 
-#content {
+* {
+  scrollbar-width: thin;
+}
+
+#main {
   max-width: 50em;
   min-height: calc(100% - 0);
   margin: 0 auto;
-  padding: 1em 2em;
+}
+
+#content {
+  padding: 2em;
+  position: relative;
 
   box-sizing: border-box;
 
   color: #F8F8F2;
   background-color: #272822;
+
+  scrollbar-color: #1c1d1a #272822;
+  scrollbar-width: thin;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 2em 0 0.5em;
+}
+
+h1 {
+  margin: 0em 0 0.5em;
+}
+
+ul {
+  margin: 0;
+  padding: 0 1em;
 }
 
 pre {
@@ -34,7 +59,7 @@ a {
   background-size: 8px 2px;
 }
 
-.dotted, a {
+.dotted, #content a {
   background-image: linear-gradient(to right, blue 50%, transparent 50%);
   background-position: 0 1.04em;
   background-repeat: repeat-x;

@@ -1,10 +1,16 @@
----
-layout: master.njk
----
+{% extends "master.njk" %}
 
-<div id='content'>
-  {% include "header.njk" %}
-  {{ content | safe }}
-</div>
-<link rel='stylesheet' type='text/css' href='{{ "/css/doc.css" | url }}'>
-<link rel='stylesheet' type='text/css' href='{{ "/css/header.css" | url }}'>
+{% block head %}
+  <link rel='stylesheet' type='text/css' href='{{ "/css/doc.css" | url }}'>
+  <link rel='stylesheet' type='text/css' href='{{ "/css/header.css" | url }}'>
+{% endblock %}
+
+{% block body %}
+  <div id='main'>
+    {% include "header.njk" %}
+
+    <div id='content'>
+      {{ content | safe }}
+    </div>
+  <div>
+{% endblock %}

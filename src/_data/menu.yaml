@@ -1,0 +1,14 @@
+- title: 1482 Docs
+- title: Java
+  permalink: /java
+- title: WPILib
+  permalink: /java/wpilib
+- title: GitHub
+  permalink: https://github.com/team1482BGHS/
+  external: true
+- title: Megaguide
+  permalink: https://drive.google.com/open?id=1G6kz16TytCpS7BV-g3-oIq_vzwj5IZW-eH3xUpyZqXQ
+  external: true
+- title: Site
+  permalink: http://www.frc1482.ca/
+  external: true

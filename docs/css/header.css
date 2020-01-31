@@ -1,16 +1,32 @@
 #header {
   width: 100%;
 
+  position: sticky;
+  top: 0;
   display: flex;
+  z-index: 10;
+
   flex-flow: row wrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: stretch;
   align-content: flex-start;
   background-color: #1c1d1a;
 }
 
-#header > * {
-  flex: flex-grow;
+#header > li {
   display: block;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+#header > li:hover {
+  background-color: #272822;
+}
+
+#header > li.noselect:hover {
+  background-color: inherit;
+}
+
+#header > li.nopad {
   padding: 10px;
 }

@@ -3,9 +3,10 @@ layout: doc.njk
 title: WPILib
 tags: java
 ---
+
 # {{ title }}
 
-WPILib is the main offical FRC library (a library is some external code that leverages code for subcomponents). It's maintained by FIRST and is used in every supported programming language (Java, C++ and Python with pyfrc).
+WPILib is the main official FRC library (a library is some external code that leverages code for subcomponents). It's maintained by FIRST and is used in every supported programming language (Java, C++ and Python with [pyfrc](https://pypi.org/project/pyfrc/)).
 
 It contains the bulk of the supporting code that runs on the robot, including
 
@@ -175,8 +176,8 @@ Inputs can be grabbed with `double getX()` and `double getY()` for the left joys
 import edu.wpi.first.wpilibj.Joystick;
 
 var joy = new Joystick(0);
-var y = joy.getX();  // Gets the x axis as a double
-var x = joy.getX();  // Gets the x axis as a double
+var y = joy.getY();  // Gets the y axis as a double ranging from -1.0 to 1.0
+var x = joy.getX();
 ```
 
 All other controller inputs can be fetched with `double getRawAxis(int axis)` or `bool getRawButton(int button)`. The axis number are labeled in DriverStation starting from 0, and the buttons are ordered in DriverStation starting from 1. For convenience, they are listed here:
@@ -203,7 +204,6 @@ Id | Button label
 9  | Left axis button
 10 | Right axis button
 
-
 ```java
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -227,12 +227,10 @@ var r = joy.getRawAxis(triggerR);  // Returns a double ranging from 0.0 to 1.0 f
 
 Pneumatic systems on the robot interact in a much simpler way in contrast to most other systems. Generally, there is only 2 electrical components: the compressor and and [solenoids](https://en.wikipedia.org/wiki/Solenoid_valve).
 
-The compressor is operated automatically whenever the robot is enabled by default, although this behavior can be changed. Using the [Compressor](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Compressor.html) class, we can manually `start()` and `stop()` it when necessary. This behavior is desirable for during PR events, or in a silent environment. 
+The compressor is operated automatically whenever the robot is enabled by default, although this behavior can be changed. Using the [Compressor](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Compressor.html) class, we can manually `start()` and `stop()` it when necessary. This behavior is desirable for during PR events, or in a silent environment.
 
 [Solenoids](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Solenoid.html) are operated similar to motor controllers: they are initialized using a identifier and are operated using simple methods. Solenoids will remember their state between loops, and do not have a running watchdog. To change the state of a solenoid, call the method `set(boolean enable)`.
 
 ## Servos
-
-
 
 ## Sensors
