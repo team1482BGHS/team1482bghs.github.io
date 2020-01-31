@@ -169,17 +169,70 @@ drive.driveCartesian(0.0, 0.0, 1.0);  // Turn entire robot clockwise (right) at 
 
 [Joysticks](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Joystick.html) are the main method of receiving input from the remote laptop. Contrary to it's name, it physically corresponds to a controller. Each controller plugged into DriverStation has a identifier number, so the first plugged in will be 0, the second 1, etc. It works across all brands of controllers that DriverStation supports.
 
-Inputs can be grabbed with `getX()` and `getY()` for the left joystick. `getRawAxis(int axis)` and `getRawButton(int button)` can be used to grab all other controller inputs.
+Inputs can be grabbed with `double getX()` and `double getY()` for the left joystick only.
 
 ```java
 import edu.wpi.first.wpilibj.Joystick;
 
+var joy = new Joystick(0);
+var y = joy.getX();  // Gets the x axis as a double
+var x = joy.getX();  // Gets the x axis as a double
+```
+
+All other controller inputs can be fetched with `double getRawAxis(int axis)` or `bool getRawButton(int button)`. The axis number are labeled in DriverStation starting from 0, and the buttons are ordered in DriverStation starting from 1. For convenience, they are listed here:
+
+Id | Axis label
+-  | ----
+0  | Left X axis
+1  | Left Y axis
+2  | L Trigger
+3  | R Trigger
+4  | Right X axis
+5  | Right Y axis
+
+Id | Button label
+-  | ----
+1  | A button
+2  | B button
+3  | X button
+4  | Y button
+5  | Left bumper
+6  | Right bumper
+7  | Back/select button
+8  | Start button
+9  | Left axis button
+10 | Right axis button
+
+
+```java
+import edu.wpi.first.wpilibj.Joystick;
+
+// Defining constants at the start of your file is a good idea so values are all in one easy to access place
+static final int buttonA = 1;
+static final int buttonY = 4;
+static final int axisX = 0;
+static final int triggerR = 3;
+
 var stick = new Joystick(0);
-stick.getX();
+
+var isAPressed = joy.getRawButton(buttonA);  // Whether or not the A button is pressed
+var isYPressed = joy.getRawButton(buttonY);
+var isLBPressed = joy.getRawButton(6);  // Also works with raw values
+
+var x = joy.getRawAxis(axisX);  // Gets the position of the X axis. Returns a double ranging from -1.0 to 1.0 for axises. Functions identical to joy.getX().
+var r = joy.getRawAxis(triggerR);  // Returns a double ranging from 0.0 to 1.0 for triggers.
 ```
 
 ## Pneumatics
 
-### Solenoids
+Pneumatic systems on the robot interact in a much simpler way in contrast to most other systems. Generally, there is only 2 electrical components: the compressor and and [solenoids](https://en.wikipedia.org/wiki/Solenoid_valve).
 
-### Compressor
+The compressor is operated automatically whenever the robot is enabled by default, although this behavior can be changed. Using the [Compressor](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Compressor.html) class, we can manually `start()` and `stop()` it when necessary. This behavior is desirable for during PR events, or in a silent environment. 
+
+[Solenoids](https://first.wpi.edu/FRC/roborio/beta/docs/java/edu/wpi/first/wpilibj/Solenoid.html) are operated similar to motor controllers: they are initialized using a identifier and are operated using simple methods. Solenoids will remember their state between loops, and do not have a running watchdog. To change the state of a solenoid, call the method `set(boolean enable)`.
+
+## Servos
+
+
+
+## Sensors

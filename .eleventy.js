@@ -6,7 +6,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   // eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.addPassthroughCopy("src/fonts");
-
   eleventyConfig.setDynamicPermalinks(false);
 
   eleventyConfig.setTemplateFormats([
@@ -31,7 +30,7 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
-    // pathPrefix: "/base/",
+    pathPrefix: "/docs",
     dir: {
       input: "src",
       output: "docs", // github uses doc for their pages

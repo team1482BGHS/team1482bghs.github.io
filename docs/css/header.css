@@ -1,0 +1,16 @@
+#header {
+  width: 100%;
+
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: flex-start;
+  background-color: #1c1d1a;
+}
+
+#header > * {
+  flex: flex-grow;
+  display: block;
+  padding: 10px;
+}

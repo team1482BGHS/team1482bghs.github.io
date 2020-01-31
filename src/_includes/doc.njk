@@ -1,7 +1,10 @@
 ---
 layout: master.njk
 ---
-<link rel='stylesheet' type='text/css' href='/css/doc.css'>
+
 <div id='content'>
+  {% include "header.njk" %}
   {{ content | safe }}
 </div>
+<link rel='stylesheet' type='text/css' href='{{ "/css/doc.css" | url }}'>
+<link rel='stylesheet' type='text/css' href='{{ "/css/header.css" | url }}'>
