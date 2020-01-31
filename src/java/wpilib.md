@@ -234,3 +234,9 @@ The compressor is operated automatically whenever the robot is enabled by defaul
 ## Servos
 
 ## Sensors
+
+### Encoders
+
+### Digital Sensors
+
+## External Boards

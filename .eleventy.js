@@ -7,8 +7,7 @@ const yaml = require("js-yaml");
 module.exports = eleventyConfig => {
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy("src/css");
-  // eleventyConfig.addPassthroughCopy("src/img");
-  eleventyConfig.addPassthroughCopy("src/fonts");
+  eleventyConfig.addPassthroughCopy("src/img");
   eleventyConfig.setDynamicPermalinks(true);
 
 
